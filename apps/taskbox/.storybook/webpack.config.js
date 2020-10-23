@@ -70,7 +70,11 @@ module.exports = async ({ config, mode }) => {
           ],
         },
       ],
-    }
+    },
+    {
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+    },
   );
 
   return config;
