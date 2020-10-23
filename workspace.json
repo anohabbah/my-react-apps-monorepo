@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "projects": {
+    "taskbox": {
+      "root": "apps/taskbox",
+      "sourceRoot": "apps/taskbox/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/taskbox",
+            "index": "apps/taskbox/src/index.html",
+            "main": "apps/taskbox/src/main.tsx",
+            "polyfills": "apps/taskbox/src/polyfills.ts",
+            "tsConfig": "apps/taskbox/tsconfig.app.json",
+            "assets": [
+              "apps/taskbox/src/favicon.ico",
+              "apps/taskbox/src/assets"
+            ],
+            "styles": ["apps/taskbox/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/taskbox/src/environments/environment.ts",
+                  "with": "apps/taskbox/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "taskbox:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "taskbox:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/taskbox/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/taskbox/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "taskbox-e2e": {
+      "root": "apps/taskbox-e2e",
+      "sourceRoot": "apps/taskbox-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/taskbox-e2e/cypress.json",
+            "tsConfig": "apps/taskbox-e2e/tsconfig.e2e.json",
+            "devServerTarget": "taskbox:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "taskbox:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/taskbox-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "schematics": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "taskbox"
+}
