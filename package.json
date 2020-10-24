@@ -29,7 +29,8 @@
   "dependencies": {
     "document-register-element": "1.13.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
@@ -57,6 +58,7 @@
     "@types/node": "~8.9.4",
     "@types/react": "16.9.38",
     "@types/react-dom": "16.9.8",
+    "@types/react-router-dom": "5.1.5",
     "@types/webpack": "4.41.21",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",

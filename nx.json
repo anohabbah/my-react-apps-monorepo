@@ -32,6 +32,13 @@
     "taskbox-e2e": {
       "tags": [],
       "implicitDependencies": ["taskbox"]
+    },
+    "streams": {
+      "tags": []
+    },
+    "streams-e2e": {
+      "tags": [],
+      "implicitDependencies": ["streams"]
     }
   }
 }
