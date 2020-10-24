@@ -13,7 +13,7 @@ export interface TaskModel {
   id: number;
   title: string;
   state: States;
-  date: Date;
+  date?: Date;
 }
 
 export interface TaskProps {
