@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GoogleAuth from './google-auth';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}
@@ -10,6 +11,12 @@ export const Header = (props: HeaderProps) => {
       <Link to="/" className="item">
         Streamy
       </Link>
+
+      <div className="right menu">
+        <Link to="/">All Streams</Link>
+
+        <GoogleAuth />
+      </div>
     </div>
   );
 };
