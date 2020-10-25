@@ -6,6 +6,7 @@ import GoogleAuth from './google-auth';
 export interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
+  console.log(props);
   return (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">

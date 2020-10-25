@@ -3,6 +3,10 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createStream } from '../../core/actions';
 
+export interface CreateProps {
+  createStream;
+}
+
 export class StreamCreate extends React.Component<CreateProps> {
   renderError = ({ error, touched }) => {
     if (touched && error) {
@@ -43,11 +47,6 @@ export class StreamCreate extends React.Component<CreateProps> {
       </form>
     );
   }
-}
-
-/* eslint-disable-next-line */
-export interface CreateProps {
-  createStream: (arg) =>void;
 }
 
 const validate = ({ description, title }) => {

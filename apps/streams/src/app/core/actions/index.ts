@@ -1,6 +1,7 @@
 import { Action, ActionCreator, AnyAction } from 'redux';
 import streams from '../apis/streams.api';
 import { ThunkDispatch } from 'redux-thunk';
+import history from '../../history';
 
 export enum AuthActions {
   SIGN_IN = 'SIGN_IN',
@@ -24,15 +25,25 @@ export const signOut: ActionCreator<Action<AuthActions>> = () => ({
   type: AuthActions.SIGN_OUT
 });
 
-export const createStream/*: ActionCreator<AnyAction>*/ =
+export const createStream =
   ({ title, description }) =>
-    async (dispatch: ThunkDispatch<undefined, undefined, AnyAction>) => {
-      const { data } = await streams.post('/streams', { title, description });
+    async (
+      dispatch: ThunkDispatch<undefined, undefined, AnyAction>,
+      getState
+    ) => {
+      const { userId } = getState().auth;
+
+      const { data } = await streams.post(
+        '/streams',
+        { title, description, userId }
+      );
 
       dispatch({
         type: StreamActions.CREATE_STREAM,
         payload: data
       });
+
+      history.push('/')
     };
 
 export const fetchStreams = () =>
@@ -53,7 +64,7 @@ export const editStream = (streamId: string, { title, description }) =>
   async (dispatch: ThunkDispatch<undefined, undefined, AnyAction>) => {
     const { data } = await streams.patch(`/streams/${streamId}`, {
       title,
-      description,
+      description
     });
 
     dispatch({ type: StreamActions.EDIT_STREAM, payload: data });
