@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { button } from '@storybook/addon-knobs';
+import { connect } from 'react-redux';
 
-/* eslint-disable-next-line */
+import { AuthActions, signIn, signOut } from '../core/actions';
+import { Action, ActionCreator } from 'redux';
+
 export interface GoogleAuthProps {
+  isSignedIn: boolean;
+  signIn: ActionCreator<Action<AuthActions>>;
+  signOut: ActionCreator<Action<AuthActions>>;
 }
 
 export class GoogleAuth extends Component<GoogleAuthProps> {
-  readonly state = { isSignedIn: null };
-
   private auth: Record<string, unknown>;
 
   componentDidMount() {
@@ -19,14 +22,18 @@ export class GoogleAuth extends Component<GoogleAuthProps> {
         })
         .then(() => {
           this.auth = window['gapi'].auth2.getAuthInstance();
-          this.setState({ isSignedIn: this.auth.isSignedIn['get']() });
+          this.onAuthChange(this.auth.isSignedIn['get']());
           this.auth.isSignedIn['listen'](this.onAuthChange);
         });
     });
   }
 
-  onAuthChange = () => {
-    this.setState({ isSignedIn: this.auth.isSignedIn['get']() });
+  onAuthChange = (isSignedIn) => {
+    if (isSignedIn) {
+      this.props.signIn();
+    } else {
+      this.props.signOut();
+    }
   };
 
   onSignIn = () => {
@@ -38,9 +45,9 @@ export class GoogleAuth extends Component<GoogleAuthProps> {
   };
 
   renderAuthButton = () => {
-    if (this.state.isSignedIn === null) {
+    if (this.props.isSignedIn === null) {
       return null;
-    } else if (this.state.isSignedIn) {
+    } else if (this.props.isSignedIn) {
       return (
         <button
           onClick={this.onSignOut}
@@ -72,4 +79,8 @@ export class GoogleAuth extends Component<GoogleAuthProps> {
   }
 }
 
-export default GoogleAuth;
+const mapStateToProps = (state) => ({
+  isSignedIn: state.auth.isSignedIn
+});
+
+export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
