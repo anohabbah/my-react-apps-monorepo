@@ -39,6 +39,9 @@
     "streams-e2e": {
       "tags": [],
       "implicitDependencies": ["streams"]
+    },
+    "json-api": {
+      "tags": []
     }
   }
 }

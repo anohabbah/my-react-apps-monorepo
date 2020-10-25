@@ -228,6 +228,56 @@
           }
         }
       }
+    },
+    "json-api": {
+      "root": "apps/json-api",
+      "sourceRoot": "apps/json-api/src",
+      "projectType": "application",
+      "prefix": "json-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/json-api",
+            "main": "apps/json-api/src/main.ts",
+            "tsConfig": "apps/json-api/tsconfig.app.json",
+            "assets": ["apps/json-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/json-api/src/environments/environment.ts",
+                  "with": "apps/json-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "json-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/json-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/json-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
