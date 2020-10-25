@@ -1,35 +1,44 @@
 import React from 'react';
 
-import { Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Streams from './streams';
+import StreamCreate from './streams/create';
+import StreamEdit from './streams/edit';
+import StreamDelete from './streams/delete';
+import StreamShow from './streams/show';
+import Header from './header';
 
 export const App = () => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./app.scss file.
-   */
   return (
-    <div className="app">
-      <Route
-        path="/"
-        exact
-        render={() => (
-          <div>
-            This is the generated root route.{' '}
-            <Link to="/page-2">Click here for page 2.</Link>
-          </div>
-        )}
-      />
-      <Route
-        path="/page-2"
-        exact
-        render={() => (
-          <div>
-            <Link to="/">Click here to go back to root page.</Link>
-          </div>
-        )}
-      />
-      {/* END: routes */}
+    <div className="ui container">
+      <BrowserRouter>
+        <Header/>
+        <Route
+          path="/"
+          exact
+          component={Streams}
+        />
+        <Route
+          path="/streams/new"
+          exact
+          component={StreamCreate}
+        />
+        <Route
+          path="/streams/edit"
+          exact
+          component={StreamEdit}
+        />
+        <Route
+          path="/streams/delete"
+          exact
+          component={StreamDelete}
+        />
+        <Route
+          path="/streams/show"
+          exact
+          component={StreamShow}
+        />
+      </BrowserRouter>
     </div>
   );
 };
