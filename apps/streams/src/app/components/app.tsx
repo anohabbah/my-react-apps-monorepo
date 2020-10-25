@@ -25,17 +25,17 @@ export const App = () => {
           component={StreamCreate}
         />
         <Route
-          path="/streams/edit"
+          path="/streams/:id/edit"
           exact
           component={StreamEdit}
         />
         <Route
-          path="/streams/delete"
+          path="/streams/:id/delete"
           exact
           component={StreamDelete}
         />
         <Route
-          path="/streams/show"
+          path="/streams/:id"
           exact
           component={StreamShow}
         />
