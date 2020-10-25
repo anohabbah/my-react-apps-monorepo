@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../core/actions';
 
 export class StreamCreate extends React.Component<CreateProps> {
   renderError = ({ error, touched }) => {
@@ -10,7 +12,7 @@ export class StreamCreate extends React.Component<CreateProps> {
     }
 
     return null;
-  }
+  };
 
   renderInput = ({ input, label, meta }) => (
     <div className={`field ${meta.error && meta.touched ? 'error' : ''} `}>
@@ -20,12 +22,17 @@ export class StreamCreate extends React.Component<CreateProps> {
     </div>
   );
 
-  onSubmit = ({ title, description }) => {};
+  onSubmit = ({ title, description }) => {
+    this.props.createStream({ title, description })
+  };
 
   render() {
     return (
-      <form className="ui form error" onSubmit={this.props['handleSubmit'](this.onSubmit)}>
-        <Field component={this.renderInput} name="title" label=">Enter Title" />
+      <form
+        className="ui form error"
+        onSubmit={this.props['handleSubmit'](this.onSubmit)}
+      >
+        <Field component={this.renderInput} name="title" label="Enter Title" />
         <Field
           component={this.renderInput}
           name="description"
@@ -39,7 +46,9 @@ export class StreamCreate extends React.Component<CreateProps> {
 }
 
 /* eslint-disable-next-line */
-export interface CreateProps {}
+export interface CreateProps {
+  createStream: (arg) =>void;
+}
 
 const validate = ({ description, title }) => {
   const errors = {};
@@ -53,9 +62,16 @@ const validate = ({ description, title }) => {
   }
 
   return errors;
-}
+};
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: 'streamCreate',
-  validate,
+  validate
 })(StreamCreate);
+
+export default connect(
+  null,
+  {
+    createStream
+  }
+)(formWrapped);
