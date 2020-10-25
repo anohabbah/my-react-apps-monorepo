@@ -1,12 +1,12 @@
 import React from 'react';
-
 import { BrowserRouter, Route } from 'react-router-dom';
-import Streams from './streams';
-import StreamCreate from './streams/create';
-import StreamEdit from './streams/edit';
-import StreamDelete from './streams/delete';
-import StreamShow from './streams/show';
+
 import Header from './header';
+import Streams from './streams';
+import StreamEdit from './streams/edit';
+import StreamShow from './streams/show';
+import StreamCreate from './streams/create';
+import StreamDelete from './streams/delete';
 
 export const App = () => {
   return (
