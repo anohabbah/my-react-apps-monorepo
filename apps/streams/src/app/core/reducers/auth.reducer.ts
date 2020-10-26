@@ -2,7 +2,7 @@ import { Action, Reducer } from 'redux';
 
 import { AuthActions } from '../actions';
 
-interface AuthState {
+export interface AuthState {
   isSignedIn: boolean;
   userId: string;
 }

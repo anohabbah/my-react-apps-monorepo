@@ -2,9 +2,6 @@ import { join } from 'path';
 import jsonServer from 'json-server';
 import debug from 'debug';
 
-// eslint-disable-next-line
-require('dotenv').config();
-
 const logger = debug('json:api');
 
 const server = jsonServer.create();

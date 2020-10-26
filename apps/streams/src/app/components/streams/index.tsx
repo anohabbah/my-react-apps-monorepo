@@ -8,16 +8,25 @@ export interface IndexProps {
   streams: { id, title, description }[];
   currentUserId: string;
   isSignedIn: boolean;
-  fetchStreams;
+  fetchStreams: () => void;
 }
 
 export class StreamsList extends React.Component<IndexProps> {
+
+  componentDidMount() {
+    this.props.fetchStreams();
+  }
 
   renderAdmin = (stream) => {
     if (stream.userId === this.props.currentUserId) {
       return (
         <div className="ui floated content">
-          <button className="ui button primary">Edit</button>
+          <Link
+            to={`/streams/${stream.id}/edit`}
+            className="ui button primary"
+          >
+            Edit
+          </Link>
           <button className="ui button negative">Delete</button>
         </div>
       );
@@ -43,7 +52,7 @@ export class StreamsList extends React.Component<IndexProps> {
     if (this.props.isSignedIn) {
       return (
         <div style={{ textAlign: 'right' }}>
-          <Link to="/streams/new">Create</Link>
+          <Link to="/streams/new" className="ui button primary">Create</Link>
         </div>
       );
     }

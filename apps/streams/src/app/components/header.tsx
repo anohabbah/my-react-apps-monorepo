@@ -6,7 +6,6 @@ import GoogleAuth from './google-auth';
 export interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
-  console.log(props);
   return (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">
@@ -14,7 +13,7 @@ export const Header = (props: HeaderProps) => {
       </Link>
 
       <div className="right menu">
-        <Link to="/">All Streams</Link>
+        <Link to="/" className="item">All Streams</Link>
 
         <GoogleAuth />
       </div>

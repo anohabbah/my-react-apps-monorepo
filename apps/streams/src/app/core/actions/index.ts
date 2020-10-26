@@ -46,8 +46,8 @@ export const createStream =
       history.push('/')
     };
 
-export const fetchStreams = () =>
-  async (dispatch: ThunkDispatch<undefined, undefined, AnyAction>) => {
+export const fetchStreams: ThunkDispatch<unknown, unknown, AnyAction> = () =>
+  async (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
     const { data } = await streams.get('/streams');
 
     dispatch({ type: StreamActions.FETCH_STREAMS, payload: data });

@@ -74,7 +74,6 @@
     "babel-jest": "26.2.2",
     "babel-loader": "8.1.0",
     "cypress": "^4.1.0",
-    "dotenv": "^8.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-cypress": "^2.10.3",

@@ -3,7 +3,9 @@ import { StreamActions } from '../actions';
 import omit from 'lodash/omit';
 import mapKeys from 'lodash/mapKeys';
 
-const streamsReducer: Reducer<Record<string, unknown>> =
+export type StreamsState = Record<string, unknown>;
+
+const streamsReducer: Reducer<StreamsState> =
   (state = {}, action: AnyAction) => {
     const payload = action['payload'];
 
