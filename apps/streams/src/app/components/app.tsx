@@ -35,7 +35,7 @@ export const App = () => {
           component={StreamDelete}
         />
         <Route
-          path="/streams/:streamId"
+          path="/streams/:streamId/show"
           exact
           component={StreamShow}
         />
