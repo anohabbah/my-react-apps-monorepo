@@ -20,7 +20,7 @@ export class StreamsList extends React.Component<IndexProps> {
   renderAdmin = (stream) => {
     if (stream.userId === this.props.currentUserId) {
       return (
-        <div className="ui floated content">
+        <div className="ui right floated">
           <Link
             to={`/streams/${stream.id}/edit`}
             className="ui button primary"
