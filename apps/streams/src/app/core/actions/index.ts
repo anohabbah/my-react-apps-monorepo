@@ -68,6 +68,8 @@ export const editStream = (streamId: string, { title, description }) =>
     });
 
     dispatch({ type: StreamActions.EDIT_STREAM, payload: data });
+
+    history.push('/');
   };
 
 export const deleteStream = (streamId: string) =>
