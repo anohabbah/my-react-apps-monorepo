@@ -35,6 +35,10 @@ export class StreamShow extends React.Component<ShowProps> {
     this.buildPlayer();
   }
 
+  componentWillUnmount() {
+    this.flvPlayer.destroy();
+  }
+
   buildPlayer = () => {
     if (this.flvPlayer || !this.props.stream) return;
 
