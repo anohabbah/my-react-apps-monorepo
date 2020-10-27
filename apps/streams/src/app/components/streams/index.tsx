@@ -46,7 +46,7 @@ export class StreamsList extends React.Component<IndexProps> {
         {this.renderAdmin(stream)}
         <i className="large middle aligned icon camera" />
         <div className="content">
-          <Link to={`/streams/${stream.id}/show`}>{stream.title}</Link>
+          <Link to={`/streams/${stream.id}`}>{stream.title}</Link>
           <div className="description">{stream.description}</div>
         </div>
       </div>
