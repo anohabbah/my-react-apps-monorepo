@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/taskbox',
     '<rootDir>/apps/streams',
     '<rootDir>/apps/json-api',
+    '<rootDir>/apps/rtmp-server',
   ],
 };

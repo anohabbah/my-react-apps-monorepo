@@ -42,6 +42,9 @@
     },
     "json-api": {
       "tags": []
+    },
+    "rtmp-server": {
+      "tags": []
     }
   }
 }
