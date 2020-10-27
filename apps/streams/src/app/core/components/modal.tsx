@@ -11,6 +11,7 @@ export interface ModalProps {
 export const Modal = (props: ModalProps) => {
   return ReactDOM.createPortal(
     <div
+      onClick={props.onDismiss}
       className="ui dimmer modals visible active"
     >
       <div

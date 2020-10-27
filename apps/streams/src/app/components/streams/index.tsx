@@ -27,7 +27,12 @@ export class StreamsList extends React.Component<IndexProps> {
           >
             Edit
           </Link>
-          <button className="ui button negative">Delete</button>
+          <Link
+            to={`/streams/${stream.id}/delete`}
+            className="ui button negative"
+          >
+            Delete
+          </Link>
         </div>
       );
     }

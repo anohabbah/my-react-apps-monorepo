@@ -1,30 +1,67 @@
 import React from 'react';
+import { connect, MapStateToProps } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Modal from '../../core/components/modal';
 import history from '../../history';
+import { deleteStream, fetchStream } from '../../core/actions';
+import { RootState } from '../../core/reducers';
 
-/* eslint-disable-next-line */
-export interface DeleteProps {}
+export interface DeleteProps {
+  stream;
+  match;
+  fetchStream;
+  deleteStream;
+}
 
-export const StreamDelete = (props: DeleteProps) => {
-  const actions = (
-    <>
-      <button className="ui button negative">Delete</button>
-      <button className="ui button secondary">Cancel</button>
-    </>
-  );
+export class StreamDelete extends React.Component<DeleteProps> {
+  componentDidMount() {
+    this.props.fetchStream(this.props.stream.id);
+  }
 
-  return (
-    <div>
-      <h1>Welcome to delete a stream page!</h1>
+  renderActions() {
+    const streamId: string = this.props.match.params.streamId;
+
+    return (
+      <>
+        <button
+          onClick={() => this.props.deleteStream(streamId)}
+          className="ui button negative"
+        >Delete</button>
+        <Link to="/" className="ui button secondary">Cancel</Link>
+      </>
+    );
+  }
+
+  renderContent = () => {
+    if (!this.props.stream) {
+      return 'Are you sure you want to delete this stream ?';
+    }
+
+    return `Are you sure you want to delete the stream with title: ${this.props.stream.title} ?`;
+  };
+
+  render() {
+    return (
       <Modal
         title="Delete Stream"
-        content="Are you sure you want to delete this stream ?"
-        actions={actions}
+        content={this.renderContent()}
+        actions={this.renderActions()}
         onDismiss={() => history.push('/')}
       />
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default StreamDelete;
+const mapStateToProps: MapStateToProps<Record<string, unknown>, Record<string, unknown>, RootState> =
+  (state, ownProps) => {
+    return { stream: state.streams[ownProps.match['params'].streamId] };
+  };
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchStream,
+    deleteStream
+  }
+)(StreamDelete);
