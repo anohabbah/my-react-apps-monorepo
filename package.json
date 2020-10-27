@@ -31,6 +31,7 @@
     "debug": "^4.2.0",
     "document-register-element": "1.13.1",
     "lodash": "^4.17.20",
+    "node-media-server": "^2.2.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.1",
