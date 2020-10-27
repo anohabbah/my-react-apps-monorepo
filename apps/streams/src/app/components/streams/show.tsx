@@ -1,14 +1,41 @@
 import React from 'react';
+import { connect, MapStateToProps } from 'react-redux';
+import { RootState } from '../../core/reducers';
+import { fetchStream } from '../../core/actions';
 
-/* eslint-disable-next-line */
-export interface ShowProps {}
+export interface ShowProps {
+  fetchStream;
+  stream;
+  match;
+}
 
-export const StreamShow = (props: ShowProps) => {
-  return (
-    <div>
-      <h1>Welcome to show a show page!</h1>
-    </div>
-  );
-};
+export class StreamShow extends React.Component<ShowProps> {
+  componentDidMount() {
+    const streamId = this.props.match.params.streamId;
+    this.props.fetchStream(streamId);
+  }
 
-export default StreamShow;
+  render() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>
+    }
+
+    const { description, title } = this.props.stream;
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps: MapStateToProps<Record<string, unknown>, Record<string, unknown>, RootState> =
+  (state, ownProps) => {
+    return { stream: state.streams[ownProps.match['params'].streamId], };
+  };
+
+export default connect(
+  mapStateToProps,
+  { fetchStream }
+)(StreamShow);
