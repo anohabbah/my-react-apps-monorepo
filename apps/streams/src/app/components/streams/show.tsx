@@ -11,7 +11,7 @@ export interface ShowProps {
 
 export class StreamShow extends React.Component<ShowProps> {
   componentDidMount() {
-    const streamId = this.props.match.params.streamId;
+    const streamId: string = this.props.match.params.streamId;
     this.props.fetchStream(streamId);
   }
 
