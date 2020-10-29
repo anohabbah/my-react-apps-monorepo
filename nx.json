@@ -45,13 +45,6 @@
     },
     "rtmp-server": {
       "tags": []
-    },
-    "store": {
-      "tags": []
-    },
-    "store-e2e": {
-      "tags": [],
-      "implicitDependencies": ["store"]
     }
   }
 }
