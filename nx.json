@@ -45,6 +45,13 @@
     },
     "rtmp-server": {
       "tags": []
+    },
+    "dojo": {
+      "tags": []
+    },
+    "dojo-e2e": {
+      "tags": [],
+      "implicitDependencies": ["dojo"]
     }
   }
 }

@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/streams',
     '<rootDir>/apps/json-api',
     '<rootDir>/apps/rtmp-server',
+    '<rootDir>/apps/dojo',
   ],
 };
